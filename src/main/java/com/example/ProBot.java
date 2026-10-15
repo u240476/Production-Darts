@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ProBot {
      static int[] boardList = {20,1,18,4,13,6,10,15,2,17,3,19,7,16,8,11,14,9,12,5}; 
-      static double TriplePercentage = 0.0; 
+    static double TriplePercentage = 0.0; 
      static double NumberPercentage = 0.0;
      static double leftPercentage = 0.0;
      static double rightPercentage = 0.0;
@@ -15,6 +15,32 @@ public class ProBot {
      static double twentyChance = 0.0;
      static double nineteenChance = 0.0;
      static double eighteenChance = 0.0;
+
+    public static int getLeft(int number, int[] board) {
+        int index = -1;
+
+        for (int i = 0; i < board.length; i++) {
+            if (board[i] == number) {
+                index = i;
+                break;
+            }
+        }
+
+        return board[(index - 1 + board.length) % board.length];
+    }
+
+    public static int getRight(int number, int[] board) {   
+        int index = -1;
+
+        for (int i = 0; i < board.length; i++) {
+            if (board[i] == number) {
+                index = i;
+                break;
+            }
+        }
+
+        return board[(index + 1) % board.length];
+    }
 
      public static void AssigningStats(
         double[] playerStatistics
@@ -42,7 +68,18 @@ public class ProBot {
                 checkoutOptionsInt[i] = checkoutToInt.get(checkoutOptions[i]);
               }
               if(numberChanceValue < outPercentage){
-                dart = 0;
+                if (checkoutOptions[checkoutIndex].charAt(0) == 'D') {
+                    dart = 0;
+                } else if (checkoutOptions[checkoutIndex].charAt(0) == 'T') {
+                    int curNum = Integer.parseInt(checkoutOptions[checkoutIndex].substring(1));
+                    if(curNum%2 == 0){
+                        dart = getLeft(curNum, boardList);
+                    }else{
+                        dart = getRight(curNum, boardList);
+                    }
+                } else if (checkoutOptions[checkoutIndex].charAt(0) == 'B') {
+                    dart = (int) numberChanceValue % 20;
+                }
                 return dart;
               }else if(numberChanceValue < outPercentage + checkoutNumberPercentage){
                 if(checkoutOptions[checkoutIndex].charAt(0) == 'T'){
