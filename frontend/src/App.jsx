@@ -6,7 +6,7 @@ export default function App() {
   return (
     <>
       <header className="topbar">
-        <NavLink to="/" className="brand">Dart-Board</NavLink>
+        <NavLink to="/" className="brand">Oche</NavLink>
         <nav aria-label="Main">
           <NavLink to="/" end>Play</NavLink>
           <NavLink to="/news">News</NavLink>
