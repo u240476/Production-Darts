@@ -23,7 +23,7 @@ export default function News() {
   return (
     <section className="page narrow">
       <h1>Darts news</h1>
-      <p className="lede">The five latest darts stories, filtered by the backend.</p>
+      <p className="lede">The Latest darts stories, filtered by the backend.</p>
 
       {state.status === "loading" && <p className="notice" role="status">Loading the latest stories…</p>}
 
